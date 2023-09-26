@@ -1,0 +1,48 @@
+<template>
+  <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Our Clients Say!</h1>
+                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item bg-light rounded p-3" v-for="test in tests" :key="test.id">
+
+                        <div class="bg-white border rounded p-4">
+                            <p> {{ test.body }} </p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded" src="../assets/img/testimonial-1.jpg" style="width: 45px; height: 45px;">
+                                <div class="ps-3">
+                                    <h6 class="fw-bold mb-1">Client Name</h6>
+                                    <small> {{ test.title }} </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+</template>
+
+<script>
+import { useTestimonialStore } from '@/stores/testimonialStore';
+import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
+export default {
+    setup(){
+        const testimonialStore = useTestimonialStore()
+        const { load,tests } = storeToRefs(testimonialStore)
+        onMounted(() => testimonialStore.getAllTestimonials())
+
+        return {
+            load, tests
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>
